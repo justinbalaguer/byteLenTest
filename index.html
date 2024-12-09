@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Text Filesize</title>
+  </head>
+  <body>
+    <p>im testing stupid stuff</p>
+    <textarea id="text"></textarea>
+    <br/>
+    <button onClick="generate6KiBText()">Generate 6KiB Text</button>
+    <p>File size in KiB: <span id="file-size-kib"></span></p>
+    <button onClick="getFileSizeInBytes()">Get File Size</button>
+  </body>
+  <script>
+    function getFileSizeInBytes() {
+      const text = document.getElementById("text").value;
+      const encoder = new TextEncoder();
+      const encodedText = encoder.encode(text);
+      const sizeInKiB = encodedText.byteLength / 1024;
+
+      document.getElementById("file-size-kib").textContent = sizeInKiB.toFixed(2).toString();
+    }
+
+    function generate6KiBText() {
+      let text = "";
+      const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      for (let i = 0; i < 6 * 1024; i++) {
+        text += characters.charAt(Math.floor(Math.random() * characters.length));
+      }
+
+      document.getElementById("text").value = text;
+    }
+  </script>
+</html>
